@@ -52,7 +52,7 @@ func init() {
 		sqlclient.RegisterCodec(MarshalHCL, EvalHCL),
 		sqlclient.RegisterFlavours("sqlite"),
 		sqlclient.RegisterURLParser(sqlclient.URLParserFunc(func(u *url.URL) *sqlclient.URL {
-			uc := &sqlclient.URL{URL: u, DSN: strings.TrimPrefix(u.String(), u.Scheme+"://"), Schema: mainFile}
+			uc := &sqlclient.URL{URL: u, DSN: fmt.Sprintf("%s%s", u.Host, u.Path), Schema: mainFile}
 			if mode := u.Query().Get("mode"); mode == "memory" {
 				// The "file:" prefix is mandatory for memory modes.
 				uc.DSN = "file:" + uc.DSN
