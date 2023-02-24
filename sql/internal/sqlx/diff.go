@@ -157,9 +157,9 @@ func (d *Diff) TableDiff(from, to *schema.Table) ([]schema.Change, error) {
 		return nil, fmt.Errorf("mismatched table names: %q != %q", from.Name, to.Name)
 	}
 	// PK modification is not supported.
-	if pk1, pk2 := from.PrimaryKey, to.PrimaryKey; (pk1 != nil) != (pk2 != nil) || (pk1 != nil) && d.pkChange(pk1, pk2) != schema.NoChange {
-		return nil, fmt.Errorf("changing %q table primary key is not supported", to.Name)
-	}
+// 	if pk1, pk2 := from.PrimaryKey, to.PrimaryKey; (pk1 != nil) != (pk2 != nil) || (pk1 != nil) && d.pkChange(pk1, pk2) != schema.NoChange {
+// 		return nil, fmt.Errorf("changing %q table primary key is not supported", to.Name)
+// 	}
 
 	// Drop or modify attributes (collations, checks, etc).
 	change, err := d.TableAttrDiff(from, to)
